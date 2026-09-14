@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import WarriorQuest from "@/components/WarriorQuest.jsx";
+import WarriorQuest from "@/components/WarriorQuest";
 
 export const Route = createFileRoute("/")({
   head: () => ({
