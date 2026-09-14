@@ -70,19 +70,24 @@ const CITIES = [
 function AboutPage() {
   return (
     <SiteLayout>
-      <div className="mx-auto max-w-5xl px-4 py-12">
-        <h1 className="font-display text-4xl font-bold ember-text">על המשחק</h1>
-        <p className="mt-4 max-w-3xl text-lg leading-relaxed text-foreground/85">
-          A Warrior Quest הוא משחק תפקידים בסגנון ימי-ביניים עתיק: אתה בוחר גיבור,
-          יוצא לערים אבודות, נלחם, אוסף שלל ובונה קריירה שנמדדת במוניטין ובמורשת.
-          המשחק נבנה כחוויה קצרה ומהירה — אבל עם עומק שמתגלה אחרי כמה סבבים.
+      <div className="mx-auto max-w-5xl px-4 py-20">
+        <p className="text-sm font-medium tracking-widest text-primary/80">
+          על המשחק
+        </p>
+        <h1 className="mt-3 text-4xl font-extrabold tracking-tight sm:text-5xl">
+          קרבות קצרים. החלטות אמיתיות.
+        </h1>
+        <p className="mt-5 max-w-2xl text-lg leading-relaxed text-muted-foreground">
+          A Warrior Quest הוא משחק תפקידים בסגנון ימי-ביניים: בוחרים גיבור, יוצאים
+          לערים אבודות, נלחמים ובונים קריירה שנמדדת במוניטין ובמורשת. חוויה מהירה
+          עם עומק שמתגלה אחרי כמה סבבים.
         </p>
 
-        <div className="mt-10 grid gap-5 sm:grid-cols-2">
+        <div className="mt-14 grid gap-4 sm:grid-cols-2">
           {UPGRADES.map((u) => (
-            <div key={u.title} className="parchment rounded-xl p-6">
-              <u.icon className="h-6 w-6 text-primary" aria-hidden="true" />
-              <h2 className="mt-3 font-display text-xl font-semibold">{u.title}</h2>
+            <div key={u.title} className="parchment rounded-2xl p-6">
+              <u.icon className="h-5 w-5 text-primary" aria-hidden="true" />
+              <h2 className="mt-4 text-lg font-semibold">{u.title}</h2>
               <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
                 {u.text}
               </p>
@@ -90,30 +95,30 @@ function AboutPage() {
           ))}
         </div>
 
-        <h2 className="mt-14 font-display text-3xl font-bold">הערים</h2>
-        <div className="mt-6 grid gap-6 md:grid-cols-3">
+        <h2 className="mt-20 text-2xl font-bold tracking-tight">הערים</h2>
+        <div className="mt-6 grid gap-4 md:grid-cols-3">
           {CITIES.map((c) => (
-            <article key={c.name} className="parchment overflow-hidden rounded-xl">
+            <article
+              key={c.name}
+              className="parchment overflow-hidden rounded-2xl"
+            >
               <img
                 src={c.img}
                 alt={`נוף העיר ${c.name}`}
-                className="h-44 w-full object-cover"
+                className="h-40 w-full object-cover"
                 loading="lazy"
               />
               <div className="p-5">
-                <h3 className="font-display text-xl font-semibold">{c.name}</h3>
-                <p className="mt-2 text-sm text-muted-foreground">{c.text}</p>
+                <h3 className="text-base font-semibold">{c.name}</h3>
+                <p className="mt-1.5 text-sm text-muted-foreground">{c.text}</p>
               </div>
             </article>
           ))}
         </div>
 
-        <div className="mt-12 flex flex-wrap gap-3">
-          <Button asChild size="lg">
-            <Link to="/play">⚔️ התחל לשחק</Link>
-          </Button>
-          <Button asChild size="lg" variant="outline">
-            <Link to="/credits">🪙 רכישת קרדיטים</Link>
+        <div className="mt-14">
+          <Button asChild size="lg" className="rounded-full px-8">
+            <Link to="/play">התחל לשחק</Link>
           </Button>
         </div>
       </div>
