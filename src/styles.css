@@ -96,14 +96,14 @@
   --sidebar-border: oklch(0.42 0.05 65 / 45%);
   --sidebar-ring: oklch(0.72 0.14 75);
 
-  --font-display: "Cinzel", serif;
+  --font-display: "Heebo", system-ui, sans-serif;
   --font-body: "Heebo", system-ui, sans-serif;
   --gradient-ember: linear-gradient(
     135deg,
-    oklch(0.72 0.14 75),
-    oklch(0.55 0.16 40)
+    oklch(0.82 0.12 80),
+    oklch(0.62 0.15 45)
   );
-  --shadow-forge: 0 18px 45px -18px oklch(0.55 0.16 40 / 60%);
+  --shadow-forge: 0 24px 60px -28px oklch(0 0 0 / 75%);
 }
 
 .dark {
@@ -155,25 +155,18 @@
   h1,
   h2,
   h3,
+  h4,
   .font-display {
     font-family: var(--font-display);
-    letter-spacing: 0.02em;
+    font-weight: 800;
+    letter-spacing: -0.015em;
   }
 }
 
 @utility parchment {
-  background-image:
-    radial-gradient(
-      circle at 20% 20%,
-      oklch(0.42 0.05 65 / 18%),
-      transparent 55%
-    ),
-    linear-gradient(
-      180deg,
-      oklch(0.24 0.03 55 / 90%),
-      oklch(0.18 0.02 55 / 92%)
-    );
-  border: 1px solid var(--color-border);
+  background-color: oklch(0.22 0.02 55 / 55%);
+  backdrop-filter: blur(14px);
+  border: 1px solid oklch(0.75 0.08 75 / 14%);
   box-shadow: var(--shadow-forge);
 }
 
@@ -181,6 +174,10 @@
   background-image: var(--gradient-ember);
   background-clip: text;
   color: transparent;
+}
+
+@utility hairline {
+  border: 1px solid oklch(0.75 0.08 75 / 14%);
 }
 
 @keyframes fall-ember {
