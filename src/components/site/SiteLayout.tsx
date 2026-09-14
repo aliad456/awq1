@@ -1,23 +1,22 @@
 import { useState, type ReactNode } from "react";
 import { Link } from "@tanstack/react-router";
-import { Menu, Swords } from "lucide-react";
+import { Menu } from "lucide-react";
 
 import {
   Sheet,
   SheetContent,
-  SheetDescription,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import { FallingEmojis } from "@/components/site/FallingEmojis";
+import { AuthButton } from "@/components/site/AuthButton";
 
 const NAV = [
-  { to: "/", label: "דף ראשי", emoji: "🏰" },
-  { to: "/about", label: "על המשחק", emoji: "📜" },
-  { to: "/play", label: "כניסה למשחק", emoji: "⚔️" },
-  { to: "/credits", label: "רכישת קרדיטים", emoji: "🪙" },
+  { to: "/", label: "ראשי" },
+  { to: "/about", label: "על המשחק" },
+  { to: "/play", label: "למשחק" },
 ] as const;
 
 export function SiteLayout({ children }: { children: ReactNode }) {
@@ -27,98 +26,89 @@ export function SiteLayout({ children }: { children: ReactNode }) {
     <div dir="rtl" className="relative min-h-screen bg-background text-foreground">
       <div
         aria-hidden="true"
-        className="pointer-events-none fixed inset-0 z-0 bg-cover bg-center opacity-25"
+        className="pointer-events-none fixed inset-0 z-0 bg-cover bg-center opacity-[0.12]"
         style={{ backgroundImage: "url(/images/bg-main.webp)" }}
       />
       <div
         aria-hidden="true"
-        className="pointer-events-none fixed inset-0 z-0 bg-gradient-to-b from-background/80 via-background/70 to-background"
+        className="pointer-events-none fixed inset-0 z-0 bg-[radial-gradient(120%_80%_at_50%_0%,oklch(0.3_0.06_60/35%),transparent_70%)]"
       />
       <FallingEmojis />
 
-      <header className="sticky top-0 z-40 border-b border-border/70 bg-background/85 backdrop-blur">
+      <header className="sticky top-0 z-40 border-b border-border/50 bg-background/70 backdrop-blur-xl">
         <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3">
-          <Link to="/" className="flex items-center gap-3">
+          <Link to="/" className="flex items-center gap-2.5">
             <img
               src="/images/logo-mark.webp"
               alt="סמל A Warrior Quest"
-              className="h-10 w-10 rounded-full border border-primary/40 object-cover"
+              className="h-8 w-8 rounded-full object-cover"
               loading="eager"
             />
-            <span className="font-display text-lg font-bold ember-text sm:text-xl">
+            <span className="text-[15px] font-semibold tracking-tight">
               A Warrior Quest
             </span>
           </Link>
 
+          {/* Desktop: inline nav */}
           <nav className="hidden items-center gap-1 md:flex">
             {NAV.map((item) => (
               <Link
                 key={item.to}
                 to={item.to}
                 activeOptions={{ exact: item.to === "/" }}
-                activeProps={{ className: "bg-secondary text-primary" }}
-                className="rounded-md px-3 py-2 text-sm font-medium text-foreground/80 transition-colors hover:bg-secondary hover:text-foreground"
+                activeProps={{ className: "text-foreground" }}
+                className="rounded-full px-3.5 py-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground"
               >
                 {item.label}
               </Link>
             ))}
           </nav>
 
-          <Sheet open={open} onOpenChange={setOpen}>
-            <SheetTrigger asChild>
-              <Button
-                variant="outline"
-                size="icon"
-                aria-label="פתיחת תפריט הצד"
-                className="border-primary/40"
-              >
-                <Menu className="h-5 w-5" aria-hidden="true" />
-              </Button>
-            </SheetTrigger>
-            <SheetContent side="right" className="w-80 border-border bg-sidebar">
-              <SheetHeader className="text-right">
-                <SheetTitle className="font-display text-xl">תפריט המסע</SheetTitle>
-                <SheetDescription>נווט בין אולמות הממלכה</SheetDescription>
-              </SheetHeader>
-              <nav className="mt-2 flex flex-col gap-1 px-4 pb-6">
-                {NAV.map((item) => (
-                  <Link
-                    key={item.to}
-                    to={item.to}
-                    onClick={() => setOpen(false)}
-                    activeOptions={{ exact: item.to === "/" }}
-                    activeProps={{
-                      className: "bg-secondary text-primary border-primary/50",
-                    }}
-                    className="flex items-center gap-3 rounded-md border border-transparent px-3 py-3 text-base font-medium transition-colors hover:bg-secondary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-                  >
-                    <span aria-hidden="true">{item.emoji}</span>
-                    {item.label}
-                  </Link>
-                ))}
-              </nav>
-              <div className="mt-auto px-4 pb-6 text-sm text-muted-foreground">
-                <p className="flex items-center gap-2">
-                  <Swords className="h-4 w-4" aria-hidden="true" />
-                  שלוש ערים. שלושה גיבורים. מורשת אחת.
-                </p>
-              </div>
-            </SheetContent>
-          </Sheet>
+          <div className="flex items-center gap-2">
+            <AuthButton />
+
+            {/* Mobile only: the same nav as a side drawer */}
+            <Sheet open={open} onOpenChange={setOpen}>
+              <SheetTrigger asChild className="md:hidden">
+                <Button variant="ghost" size="icon" aria-label="פתיחת תפריט">
+                  <Menu className="h-5 w-5" aria-hidden="true" />
+                </Button>
+              </SheetTrigger>
+              <SheetContent side="right" className="w-72 bg-sidebar">
+                <SheetHeader className="text-right">
+                  <SheetTitle className="text-base font-semibold">תפריט</SheetTitle>
+                </SheetHeader>
+                <nav className="flex flex-col gap-1 px-4 pb-6">
+                  {NAV.map((item) => (
+                    <Link
+                      key={item.to}
+                      to={item.to}
+                      onClick={() => setOpen(false)}
+                      activeOptions={{ exact: item.to === "/" }}
+                      activeProps={{ className: "bg-secondary text-foreground" }}
+                      className="rounded-lg px-3 py-2.5 text-base text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
+                    >
+                      {item.label}
+                    </Link>
+                  ))}
+                </nav>
+              </SheetContent>
+            </Sheet>
+          </div>
         </div>
       </header>
 
       <main className="relative z-10">{children}</main>
 
-      <footer className="relative z-10 border-t border-border/70 bg-background/80 py-8">
-        <div className="mx-auto flex max-w-6xl flex-col items-center gap-3 px-4 text-center text-sm text-muted-foreground">
+      <footer className="relative z-10 border-t border-border/50 py-10">
+        <div className="mx-auto flex max-w-6xl flex-col items-center gap-3 px-4 text-center text-xs text-muted-foreground">
           <img
             src="/images/logo.webp"
             alt="לוגו A Warrior Quest"
-            className="h-12 w-auto opacity-90"
+            className="h-10 w-auto opacity-70"
             loading="lazy"
           />
-          <p>© {new Date().getFullYear()} A Warrior Quest — ממלכות אטלנטיס, למוריה ופומפיי.</p>
+          <p>© {new Date().getFullYear()} A Warrior Quest</p>
         </div>
       </footer>
     </div>

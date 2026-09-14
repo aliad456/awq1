@@ -1,15 +1,15 @@
-const EMOJIS = ["⚔️", "🛡️", "🔥", "🏹", "👑", "🪙", "🗡️", "✨", "🐉", "🏰"];
+const EMOJIS = ["⚔️", "🛡️", "🏹", "🔥"];
 
-const PIECES = Array.from({ length: 26 }, (_, i) => {
+const PIECES = Array.from({ length: 14 }, (_, i) => {
   const seed = (i * 97) % 100;
   return {
     emoji: EMOJIS[i % EMOJIS.length],
     left: (seed * 3.7) % 100,
-    delay: (i * 0.73) % 12,
-    duration: 11 + ((i * 5) % 14),
-    size: 14 + ((i * 7) % 22),
-    drift: ((i % 5) - 2) * 40,
-    opacity: 0.18 + ((i % 4) * 0.08),
+    delay: (i * 1.4) % 18,
+    duration: 20 + ((i * 5) % 16),
+    size: 12 + ((i * 5) % 10),
+    drift: ((i % 5) - 2) * 30,
+    opacity: 0.05 + (i % 3) * 0.025,
   };
 });
 
