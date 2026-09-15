@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 
 import SiteLayout from "@/components/site/SiteLayout";
+import AuthGate from "@/components/site/AuthGate";
 import WarriorQuest from "@/components/WarriorQuest";
 
 export const Route = createFileRoute("/play")({
@@ -30,7 +31,9 @@ function PlayPage() {
       <div className="mx-auto max-w-6xl px-4 py-6">
         <h1 className="sr-only">כניסה למשחק A Warrior Quest</h1>
         <div className="parchment rounded-2xl p-2 sm:p-4">
-          <WarriorQuest />
+          <AuthGate>
+            <WarriorQuest />
+          </AuthGate>
         </div>
       </div>
     </SiteLayout>
