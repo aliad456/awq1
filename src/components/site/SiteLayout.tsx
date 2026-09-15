@@ -14,9 +14,8 @@ import { FallingEmojis } from "@/components/site/FallingEmojis";
 import { AuthButton } from "@/components/site/AuthButton";
 
 const NAV = [
-  { to: "/", label: "ראשי" },
+  { to: "/", label: "המשחק" },
   { to: "/about", label: "על המשחק" },
-  { to: "/play", label: "למשחק" },
 ] as const;
 
 export function SiteLayout({ children }: { children: ReactNode }) {
