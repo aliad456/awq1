@@ -118,7 +118,7 @@ function AboutPage() {
 
         <div className="mt-14">
           <Button asChild size="lg" className="rounded-full px-8">
-            <Link to="/play">התחל לשחק</Link>
+            <Link to="/">התחל לשחק</Link>
           </Button>
         </div>
       </div>
