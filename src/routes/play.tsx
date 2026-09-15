@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 
 import SiteLayout from "@/components/site/SiteLayout";
+import AuthGate from "@/components/site/AuthGate";
 import WarriorQuest from "@/components/WarriorQuest";
 
 export const Route = createFileRoute("/play")({
